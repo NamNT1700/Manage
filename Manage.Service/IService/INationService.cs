@@ -11,7 +11,7 @@ namespace Manage.Service.IService
     public interface INationService
     {
         Task<Response> AddNew(NationDTO nation);
-        Task<Response> GetAll(BaseRequest request);
+        Task<Response> GetAll(Request request);
         Task<Response> GetById(int id);
         Task<Response> Update(UpdateNationDTO update);
         Task<Response> Delete(List<int> ids);

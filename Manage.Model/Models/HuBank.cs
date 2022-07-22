@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
-
-#nullable disable
+using Manage.Model.Base;
 
 namespace Manage.Model.Models
 {
     [Table("hu_bank")]
-    public partial class HuBank
+    public partial class HuBank : IEntityBase
     {
         public HuBank()
         {

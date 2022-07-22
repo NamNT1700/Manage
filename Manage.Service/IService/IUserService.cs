@@ -11,7 +11,7 @@ namespace Manage.Service.IService
     public interface IUserService
     {
         public Task<Response> Register(UserDTO reUser);
-        public Task<Response> GetAllUsers(BaseRequest request,string token);
+        public Task<Response> GetAllUsers(Request request);
         public Task<Response> Login(LoginDTO user);
         public Task<Response> DeleteUsers(List<int> ids);
         public Task<Response> FindUserById(int id);

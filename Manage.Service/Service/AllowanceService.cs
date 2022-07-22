@@ -29,13 +29,19 @@ namespace Manage.Service.Service
         {
             Response responce = new Response();
             string message = await _allowanceRepositoryWrapper.Allowance.CheckData(allowance);
-            if (message != null)
+            string messageCheck = _allowanceRepositoryWrapper.Allowance.CheckNull( allowance.Code, allowance.Id);
+            if (message != null )
             {
                 responce.message = message;
                 responce.status = "400";
                 return responce;
             }
-
+            if (messageCheck != null)
+            {
+                responce.message = messageCheck;
+                responce.status = "400";
+                return responce;
+            }
             HuAllowance huAllowance = _mapper.Map<HuAllowance>(allowance);
             huAllowance.CreatedTime = DateTime.Now;
             huAllowance.LastUpdateTime = DateTime.Now;
@@ -49,21 +55,37 @@ namespace Manage.Service.Service
 
        
 
-        public async Task<Response> GetAll(BaseRequest request)
+        public async Task<Response> GetAll(Request request)
         {
             Response response = new Response();
-            List<HuAllowance> huAllwances = await _allowanceRepositoryWrapper.Allowance.GetAll();
-            List<ListAllowanceDTO> listAllwance =  _mapper.Map<List<ListAllowanceDTO>>(huAllwances);
-            List<ListAllowanceDTO> lists = new List<ListAllowanceDTO>();
-            int firstIndex = (request.pageNum - 1) * request.pageSize;
-            if (firstIndex >= huAllwances.Count())
+            if (request.pageNum > request.pageSize)
             {
                 response.status = "400";
                 response.success = false;
-                response.message = "no user yet";
+                response.message = "this page is not exist";
                 return response;
             }
-            if (firstIndex + request.pageSize < huAllwances.Count())
+            if (request.pageNum <= 0 && request.pageSize <=0)
+            {
+                response.status = "400";
+                response.success = false;
+                response.message = "pageNum and pageSize error";
+                return response;
+            }
+
+           
+            List<HuAllowance> huAllowances = await _allowanceRepositoryWrapper.Allowance.GetAll();
+            List<ListAllowanceDTO> listAllwance =  _mapper.Map<List<ListAllowanceDTO>>(huAllowances);
+            List<ListAllowanceDTO> lists = new List<ListAllowanceDTO>();
+            int firstIndex = (request.pageNum - 1) * request.pageSize;
+            if (firstIndex >= huAllowances.Count())
+            {
+                response.status = "400";
+                response.success = false;
+                response.message = "no data";
+                return response;
+            }
+            if (firstIndex + request.pageSize < huAllowances.Count())
                 lists = listAllwance.GetRange(firstIndex, request.pageSize);
             else lists = listAllwance.GetRange(firstIndex, listAllwance.Count - firstIndex);
             response.status = "200";
@@ -84,7 +106,7 @@ namespace Manage.Service.Service
                 response.success = true;
                 return response;
             }
-            response.message = $"no allwance with id {id} exist";
+            response.message = $"no allowance with id {id} exist";
             response.status = "400";
             response.success = false;
             return response;
@@ -114,10 +136,10 @@ namespace Manage.Service.Service
             Response response = new Response();
             foreach (int id in ids)
             {
-                HuAllowance allwance = await _allowanceRepositoryWrapper.Allowance.FindById(id);
-                await _allowanceRepositoryWrapper.Allowance.Delete(allwance);
+                HuAllowance allowance = await _allowanceRepositoryWrapper.Allowance.FindById(id);
+                await _allowanceRepositoryWrapper.Allowance.Delete(allowance);
             }
-            response.message = "Delete allwance";
+            response.message = "Delete allowance";
             response.status = "200";
             response.success = true;
             return response;

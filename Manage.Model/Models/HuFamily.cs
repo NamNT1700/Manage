@@ -1,20 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Manage.Model.Base;
 using Microsoft.EntityFrameworkCore;
-
-#nullable disable
 
 namespace Manage.Model.Models
 {
     [Table("hu_family")]
     [Index(nameof(EmployeeId), Name = "IX_hu_family_employee_id")]
-    public partial class HuFamily
+    public partial class HuFamily : IEntityBase
     {
         [Key]
         [Column("id")]
         public int Id { get; set; }
+
+        public string Code { get; set; }
+
         [Column("created_by")]
         [StringLength(50)]
         public string CreatedBy { get; set; }

@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Manage.Model.Base;
 using Microsoft.EntityFrameworkCore;
-
-#nullable disable
 
 namespace Manage.Model.Models
 {
     [Table("hu_type_of_contract")]
     [Index(nameof(ContractId), Name = "IX_hu_type_of_contract_contract_id")]
-    public partial class HuTypeOfContract
+    public partial class HuTypeOfContract : IEntityBase
     {
         [Key]
         [Column("id")]

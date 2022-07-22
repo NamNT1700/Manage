@@ -32,6 +32,13 @@ namespace Manage.Service.Service
         {
             Response responce = new Response();
             string message = await _huTitleRepositoryWrapper.Title.CheckData(title);
+            string messageCheck = _huTitleRepositoryWrapper.Title.CheckNull(title.Code, title.Id);
+            if (messageCheck != null)
+            {
+                responce.message = messageCheck;
+                responce.status = "400";
+                return responce;
+            }
             if (message != null)
             {
                 responce.message = message;
@@ -52,9 +59,23 @@ namespace Manage.Service.Service
 
 
 
-        public async Task<Response> GetAll(BaseRequest request)
+        public async Task<Response> GetAll(Request request)
         {
             Response response = new Response();
+            if (request.pageNum > request.pageSize)
+            {
+                response.status = "400";
+                response.success = false;
+                response.message = "this page is not exist";
+                return response;
+            }
+            if (request.pageNum <= 0 && request.pageSize <= 0)
+            {
+                response.status = "400";
+                response.success = false;
+                response.message = "pageNum and pageSize error";
+                return response;
+            }
             List<HuTitle> huNations = await _huTitleRepositoryWrapper.Title.GetAll();
             List<ListTitleDTO> listAllwance = _mapper.Map<List<ListTitleDTO>>(huNations);
             List<ListTitleDTO> lists = new List<ListTitleDTO>();
@@ -63,7 +84,7 @@ namespace Manage.Service.Service
             {
                 response.status = "400";
                 response.success = false;
-                response.message = "no user yet";
+                response.message = "no data";
                 return response;
             }
             if (firstIndex + request.pageSize < huNations.Count())

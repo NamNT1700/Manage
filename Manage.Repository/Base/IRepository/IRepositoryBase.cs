@@ -10,6 +10,7 @@ namespace Manage.Repository.Base.IRepository
     {
         IQueryable<T> FindAll();
         IQueryable<T> FindByCondition(Expression<Func<T,bool>> expression);
+        string CheckNull(string code,int id);
         Task Create(T entity);
         Task Update(T entity);
         Task Delete(T entity);

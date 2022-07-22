@@ -26,7 +26,7 @@ namespace Manage.API.Controllers
             return Ok(response);
         }
         [HttpPost("GetAllHospital")]
-        public async Task<IActionResult> GetAll(BaseRequest request)
+        public async Task<IActionResult> GetAll(Request request)
         {
             Response response = await _hospitalService.GetAll(request);
             return Ok(response);

@@ -1,10 +1,7 @@
-﻿using Manage.Model.DTO.User;
-using Manage.Model.Models;
+﻿using Manage.Model.Models;
 using Manage.Repository.Base.IRepository;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Manage.Repository.IRepository
@@ -14,7 +11,7 @@ namespace Manage.Repository.IRepository
         public Task<string> CheckUserLogin(string username, string password);
         public Task<SeUser> FindById(int id);
         //public Task<string> CheckUserInfo(string username, string email);
-        public Task<bool> CheckPassword(SeUser user,string password);
+        public Task<SeUser> CheckPassword(string password);
         public Task<SeUser> FindByUsername(string username);
         public Task<List<SeUser>> FindAllData();
     }

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Manage.API.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [Controller]
     public class UserController : ControllerBase
     {
         private IUserService _userService;
@@ -27,9 +27,9 @@ namespace Manage.API.Controllers
             return Ok(res);
         }
         [HttpPost("GetAllUsers")]
-        public async Task<IActionResult> GetAllUsers(BaseRequest baseRequest,string token)
+        public async Task<IActionResult> GetAllUsers(Request baseRequest)
         {
-            Response res = await _userService.GetAllUsers(baseRequest, token);
+            Response res = await _userService.GetAllUsers(baseRequest);
             return Ok(res);
         }
         [HttpPost("Login")]

@@ -27,6 +27,20 @@ namespace Manage.Repository.Base.Repository
             return _context.Set<T>().Where(expression);
         }
 
+        public string CheckNull(string code, int id)
+        {
+            if (code == null)
+            {
+                return "code is null";
+            }
+
+            else if (id <= 0)
+            {
+                return "id is null";
+            }
+            return null;
+        }
+
         public async Task Create(T entity)
         {
             await _context.Set<T>().AddAsync(entity);
@@ -41,8 +55,10 @@ namespace Manage.Repository.Base.Repository
 
         public async Task Delete(T entity)
         {
+
             await Task.Run(() => _context.Set<T>().Remove(entity));
             await _context.SaveChangesAsync();
+
         }
         public async Task<T> FindByCode(string code)
         {
@@ -51,10 +67,11 @@ namespace Manage.Repository.Base.Repository
 
         public async Task<T> FindById(int id)
         {
+
             return await FindByCondition(a => a.Id.Equals(id)).FirstOrDefaultAsync();
 
         }
-       
+
         public async Task<List<T>> GetAll()
         {
             return await Task.Run(() => FindAll().OrderBy(a => a.Id).ToList());

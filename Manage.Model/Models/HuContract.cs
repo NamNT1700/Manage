@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
-
-#nullable disable
+using Manage.Model.Base;
 
 namespace Manage.Model.Models
 {
     [Table("hu_contract")]
-    public partial class HuContract
+    public partial class HuContract : IEntityBase
     {
         public HuContract()
         {
@@ -55,7 +53,7 @@ namespace Manage.Model.Models
         public virtual ICollection<HuContractualBenefit> HuContractualBenefits { get; set; }
         [InverseProperty(nameof(HuEmployee.Contract))]
         public virtual ICollection<HuEmployee> HuEmployees { get; set; }
-        [InverseProperty(nameof(HuSalaryRecord.Contrac))]
+        [InverseProperty(nameof(HuSalaryRecord.Contract))]
         public virtual ICollection<HuSalaryRecord> HuSalaryRecords { get; set; }
         [InverseProperty(nameof(HuTypeOfContract.Contract))]
         public virtual ICollection<HuTypeOfContract> HuTypeOfContracts { get; set; }

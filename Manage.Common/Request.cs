@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Manage.Common
 {
-    public class BaseRequest
+    public class Request
     {
         ////Define the variable name in the header that stores the correlation-id
             //public Guid crid { get; set; }

@@ -1,19 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
-
-#nullable disable
+using Manage.Model.Base;
 
 namespace Manage.Model.Models
 {
-    [Table("hu_shools")]
-    public partial class HuShool
+    [Table("hu_schools")]
+    public partial class HuSchool : IEntityBase
     {
         [Key]
         [Column("id")]
         public int Id { get; set; }
+
+        public string Code { get; set; }
+
         [Column("employee_id")]
         public int? EmployeeId { get; set; }
         [Column("from_date", TypeName = "datetime")]

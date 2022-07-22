@@ -35,11 +35,11 @@ namespace Manage.Model.Context
         public virtual DbSet<HuOrganization> HuOrganizations { get; set; }
         public virtual DbSet<HuProvince> HuProvinces { get; set; }
         public virtual DbSet<HuSalaryRecord> HuSalaryRecords { get; set; }
-        public virtual DbSet<HuShool> HuShools { get; set; }
+        public virtual DbSet<HuSchool> HuShools { get; set; }
         public virtual DbSet<HuTitle> HuTitles { get; set; }
         public virtual DbSet<HuTypeOfContract> HuTypeOfContracts { get; set; }
         public virtual DbSet<HuWard> HuWards { get; set; }
-        public virtual DbSet<HuWelface> HuWelfaces { get; set; }
+        public virtual DbSet<HuWelfare> HuWelfaces { get; set; }
         public virtual DbSet<OtherList> OtherLists { get; set; }
         public virtual DbSet<OtherListType> OtherListTypes { get; set; }
         public virtual DbSet<SeUser> SeUsers { get; set; }
@@ -123,7 +123,7 @@ namespace Manage.Model.Context
                 entity.Property(e => e.Id).ValueGeneratedNever();
             });
 
-            modelBuilder.Entity<HuShool>(entity =>
+            modelBuilder.Entity<HuSchool>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 

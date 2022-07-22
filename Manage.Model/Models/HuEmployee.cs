@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Manage.Model.Base;
 using Microsoft.EntityFrameworkCore;
-
-#nullable disable
 
 namespace Manage.Model.Models
 {
@@ -12,7 +11,7 @@ namespace Manage.Model.Models
     [Index(nameof(ContractId), Name = "IX_hu_employee_contract_id")]
     [Index(nameof(OrgId), Name = "IX_hu_employee_org_id")]
     [Index(nameof(TitleId), Name = "IX_hu_employee_title_id")]
-    public partial class HuEmployee
+    public partial class HuEmployee : IEntityBase
     {
         public HuEmployee()
         {
@@ -20,7 +19,7 @@ namespace Manage.Model.Models
             HuEmployeeEducations = new HashSet<HuEmployeeEducation>();
             HuFamilies = new HashSet<HuFamily>();
             HuSalaryRecords = new HashSet<HuSalaryRecord>();
-            HuShools = new HashSet<HuShool>();
+            HuShools = new HashSet<HuSchool>();
         }
 
         [Key]
@@ -92,7 +91,7 @@ namespace Manage.Model.Models
         public virtual ICollection<HuFamily> HuFamilies { get; set; }
         [InverseProperty(nameof(HuSalaryRecord.Employee))]
         public virtual ICollection<HuSalaryRecord> HuSalaryRecords { get; set; }
-        [InverseProperty(nameof(HuShool.Employee))]
-        public virtual ICollection<HuShool> HuShools { get; set; }
+        [InverseProperty(nameof(HuSchool.Employee))]
+        public virtual ICollection<HuSchool> HuShools { get; set; }
     }
 }

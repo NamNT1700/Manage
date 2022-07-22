@@ -1,19 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Manage.Model.Base;
 using Microsoft.EntityFrameworkCore;
-
-#nullable disable
 
 namespace Manage.Model.Models
 {
     [Table("hu_salary_records")]
-    [Index(nameof(ContracId), Name = "IX_hu_salary_records_contrac_id")]
-    [Index(nameof(ContractAllwanceId), Name = "IX_hu_salary_records_contract_allwance_id")]
-    [Index(nameof(ContractWelfaceId), Name = "IX_hu_salary_records_contract_welface_id")]
+    [Index(nameof(ContractId), Name = "IX_hu_salary_records_contract_id")]
+    [Index(nameof(ContractAllowanceId), Name = "IX_hu_salary_records_contract_allowance_id")]
+    [Index(nameof(ContractWelfareId), Name = "IX_hu_salary_records_contract_welfare_id")]
     [Index(nameof(EmployeeId), Name = "IX_hu_salary_records_employee_id")]
-    public partial class HuSalaryRecord
+    public partial class HuSalaryRecord : IEntityBase
     {
         [Key]
         [Column("id")]
@@ -32,24 +30,24 @@ namespace Manage.Model.Models
         [Column("last_update_time", TypeName = "datetime")]
         public DateTime? LastUpdateTime { get; set; }
         public int? EmployeeId { get; set; }
-        [Column("contrac_id")]
-        public int? ContracId { get; set; }
-        [Column("contract_allwance_id")]
-        public int? ContractAllwanceId { get; set; }
-        [Column("contract_welface_id")]
-        public int? ContractWelfaceId { get; set; }
+        [Column("contract_id")]
+        public int? ContractId { get; set; }
+        [Column("contract_allowance_id")]
+        public int? ContractAllowanceId { get; set; }
+        [Column("contract_welfare_id")]
+        public int? ContractWelfareId { get; set; }
         [Column("money")]
         public double? Money { get; set; }
 
-        [ForeignKey(nameof(ContracId))]
+        [ForeignKey(nameof(ContractId))]
         [InverseProperty(nameof(HuContract.HuSalaryRecords))]
-        public virtual HuContract Contrac { get; set; }
-        [ForeignKey(nameof(ContractAllwanceId))]
+        public virtual HuContract Contract { get; set; }
+        [ForeignKey(nameof(ContractAllowanceId))]
         [InverseProperty(nameof(HuContractAllowance.HuSalaryRecords))]
-        public virtual HuContractAllowance ContractAllwance { get; set; }
-        [ForeignKey(nameof(ContractWelfaceId))]
-        [InverseProperty(nameof(HuWelface.HuSalaryRecords))]
-        public virtual HuWelface ContractWelface { get; set; }
+        public virtual HuContractAllowance ContractAllowance { get; set; }
+        [ForeignKey(nameof(ContractWelfareId))]
+        [InverseProperty(nameof(HuWelfare.HuSalaryRecords))]
+        public virtual HuWelfare ContractWelfare { get; set; }
         [ForeignKey(nameof(EmployeeId))]
         [InverseProperty(nameof(HuEmployee.HuSalaryRecords))]
         public virtual HuEmployee Employee { get; set; }

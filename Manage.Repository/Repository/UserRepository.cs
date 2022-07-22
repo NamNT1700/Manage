@@ -1,5 +1,4 @@
 ﻿using Manage.Model.Context;
-using Manage.Model.DTO.User;
 using Manage.Model.Models;
 using Manage.Repository.Base.Repository;
 using Manage.Repository.IRepository;
@@ -7,8 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Manage.Repository.Repository
@@ -18,22 +15,14 @@ namespace Manage.Repository.Repository
         public UserRepository(DatabaseContext context) : base(context)
         {
         }
-        public async Task<bool> CheckPassword(SeUser user,string password)
+        public async Task<SeUser> CheckPassword(string password)
         {
-            if (user.Password == password)
-                return true;
-            return false;
+            return await FindByCondition(u => u.Password.Equals(password)).FirstOrDefaultAsync();
         }
 
-        public async Task<string> CheckUserLogin(string username, string password)
+        public Task<string> CheckUserLogin(string username, string password)
         {
-            SeUser seUser = await FindByUsername(username);
-            if (seUser == null)
-                return "wrong username";
-            bool isTrue =  await CheckPassword(seUser,password);
-            if (isTrue == false)
-                return "wrong password";
-            return null;
+            throw new NotImplementedException();
         }
 
         public async Task<List<SeUser>> FindAllData()
@@ -43,6 +32,12 @@ namespace Manage.Repository.Repository
             datas = await Task.Run(()=> FindAll().Where(u => u.ActiveFlg.Equals("A")).ToList());
             return datas;
         }
+
+        public async Task<SeUser> FindById(int id)
+        {
+            return await FindByCondition(u => u.Id.Equals(id)).FirstOrDefaultAsync();
+        }
+
         public async Task<SeUser> FindByUsername(string username)
         {
             return await FindByCondition(u => u.Username.Equals(username)).FirstOrDefaultAsync();

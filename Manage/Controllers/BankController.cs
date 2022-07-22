@@ -26,7 +26,7 @@ namespace Manage.API.Controllers
             return Ok(response);
         }
         [HttpPost("bank-get-all")]
-        public async Task<IActionResult> GetAll( BaseRequest request)
+        public async Task<IActionResult> GetAll( Request request)
         {
             Response response = await _bankService.GetAll(request);
             return Ok(response);

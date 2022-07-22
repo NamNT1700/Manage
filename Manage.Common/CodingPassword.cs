@@ -8,7 +8,7 @@ namespace Manage.Common
 {
     public class CodingPassword
     {
-        public static string EncodingUTF8(string password)
+        public static string EncodingUtf8(string password)
         {
             Byte[] passBytes = Encoding.UTF8.GetBytes(password);
             string passE = "";

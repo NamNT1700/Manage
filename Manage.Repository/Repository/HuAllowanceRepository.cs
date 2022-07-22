@@ -22,6 +22,7 @@ namespace Manage.Repository.Repository
             huAllowance = await FindById(allowance.Id);
             if (huAllowance != null)
                 return "id already exist";
+            
             return null;
         }
         public async Task<List<HuAllowance>> GetAll()

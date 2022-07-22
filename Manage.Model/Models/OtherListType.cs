@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
-
-#nullable disable
+using Manage.Model.Base;
 
 namespace Manage.Model.Models
 {
     [Table("other_list_type")]
-    public partial class OtherListType
+    public partial class OtherListType : IEntityBase
     {
         [Key]
         [Column("id")]

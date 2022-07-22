@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
-
-#nullable disable
+using Manage.Model.Base;
 
 namespace Manage.Model.Models
 {
     [Table("hu_allowance")]
-    public partial class HuAllowance
+    public partial class HuAllowance : IEntityBase
     {
         public HuAllowance()
         {
@@ -38,7 +36,7 @@ namespace Manage.Model.Models
         [Column("last_update_time", TypeName = "datetime")]
         public DateTime? LastUpdateTime { get; set; }
 
-        [InverseProperty(nameof(HuContractAllowance.Allwance))]
+        [InverseProperty(nameof(HuContractAllowance.AllowanceId))]
         public virtual ICollection<HuContractAllowance> HuContractAllowances { get; set; }
     }
 }

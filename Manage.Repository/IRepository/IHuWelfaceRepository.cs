@@ -3,7 +3,7 @@ using Manage.Repository.Base.IRepository;
 
 namespace Manage.Repository.IRepository
 {
-    public interface IHuWelfaceRepository : IRepositoryBase<HuWelface>
+    public interface IHuWelfareRepository : IRepositoryBase<HuWelfare>
     {
     }
 }

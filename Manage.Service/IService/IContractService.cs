@@ -11,7 +11,7 @@ namespace Manage.Service.IService
     public interface IContractService
     {
         Task<Response> AddNew(ContractDTO bank);
-        Task<Response> GetAll(BaseRequest request);
+        Task<Response> GetAll(Request request);
         Task<Response> GetById(int id);
         Task<Response> Update(UpdateContractDTO update);
         Task<Response> Delete(List<int> ids);

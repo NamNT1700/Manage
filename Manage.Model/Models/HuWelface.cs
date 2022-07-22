@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
-
-#nullable disable
+using Manage.Model.Base;
 
 namespace Manage.Model.Models
 {
-    [Table("hu_welface")]
-    public partial class HuWelface
+    [Table("hu_welfare")]
+    public partial class HuWelfare : IEntityBase
     {
-        public HuWelface()
+        public HuWelfare()
         {
             HuContractualBenefits = new HashSet<HuContractualBenefit>();
             HuSalaryRecords = new HashSet<HuSalaryRecord>();
@@ -39,9 +37,9 @@ namespace Manage.Model.Models
         [Column("activeflg")]
         public string Activeflg { get; set; }
 
-        [InverseProperty(nameof(HuContractualBenefit.Welface))]
+        [InverseProperty(nameof(HuContractualBenefit.Welfare))]
         public virtual ICollection<HuContractualBenefit> HuContractualBenefits { get; set; }
-        [InverseProperty(nameof(HuSalaryRecord.ContractWelface))]
+        [InverseProperty(nameof(HuSalaryRecord.ContractWelfare))]
         public virtual ICollection<HuSalaryRecord> HuSalaryRecords { get; set; }
     }
 }

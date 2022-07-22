@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Manage.Model.Base;
 using Microsoft.EntityFrameworkCore;
-
-#nullable disable
 
 namespace Manage.Model.Models
 {
     [Table("other_list")]
     [Index(nameof(TypeId), Name = "IX_other_list_type_id")]
-    public partial class OtherList
+    public partial class OtherList : IEntityBase
     {
         [Key]
         [Column("id")]

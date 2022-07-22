@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Manage.Model.Base;
 using Microsoft.EntityFrameworkCore;
-
-#nullable disable
 
 namespace Manage.Model.Models
 {
     [Table("hu_district")]
     [Index(nameof(ProvinceId), Name = "IX_hu_district_province_id")]
-    public partial class HuDistrict
+    public partial class HuDistrict : IEntityBase
     {
         public HuDistrict()
         {

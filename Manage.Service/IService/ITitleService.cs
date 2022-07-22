@@ -11,7 +11,7 @@ namespace Manage.Service.IService
     public interface ITitleService
     {
         Task<Response> AddNew(TitleDTO title);
-        Task<Response> GetAll(BaseRequest request);
+        Task<Response> GetAll(Request request);
         Task<Response> GetById(int id);
         Task<Response> Update(UpdateTitleDTO update);
         Task<Response> Delete(List<int> ids);

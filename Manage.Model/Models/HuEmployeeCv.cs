@@ -1,19 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
-
-#nullable disable
+using Manage.Model.Base;
 
 namespace Manage.Model.Models
 {
     [Table("hu_employee_cv")]
-    public partial class HuEmployeeCv
+    public partial class HuEmployeeCv : IEntityBase
     {
         [Key]
         [Column("id")]
         public int Id { get; set; }
+
+        public string Code { get; set; }
+
         [Column("created_by")]
         [StringLength(50)]
         public string CreatedBy { get; set; }

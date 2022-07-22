@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Manage.Model.Base;
 using Microsoft.EntityFrameworkCore;
-
-#nullable disable
 
 namespace Manage.Model.Models
 {
     [Table("hu_Contract_allowance")]
-    [Index(nameof(AllwanceId), Name = "IX_hu_Contract_allowance_allwance_id")]
+    [Index(nameof(AllowanceId), Name = "IX_hu_Contract_allowance_allowance_id")]
     [Index(nameof(ContractId), Name = "IX_hu_Contract_allowance_contract_id")]
-    public partial class HuContractAllowance
+    public partial class HuContractAllowance : IEntityBase
     {
         public HuContractAllowance()
         {
@@ -36,20 +35,20 @@ namespace Manage.Model.Models
         public DateTime? LastUpdateTime { get; set; }
         [Column("contract_id")]
         public int? ContractId { get; set; }
-        [Column("allwance_id")]
-        public int? AllwanceId { get; set; }
+        [Column("allowance_id")]
+        public int? AllowanceId { get; set; }
         [Column("money")]
         public double? Money { get; set; }
         [Column("activeflg")]
         public string Activeflg { get; set; }
 
-        [ForeignKey(nameof(AllwanceId))]
+        [ForeignKey(nameof(AllowanceId))]
         [InverseProperty(nameof(HuAllowance.HuContractAllowances))]
-        public virtual HuAllowance Allwance { get; set; }
+        public virtual HuAllowance Allowance { get; set; }
         [ForeignKey(nameof(ContractId))]
         [InverseProperty(nameof(HuContract.HuContractAllowances))]
         public virtual HuContract Contract { get; set; }
-        [InverseProperty(nameof(HuSalaryRecord.ContractAllwance))]
+        [InverseProperty(nameof(HuSalaryRecord.ContractAllowance))]
         public virtual ICollection<HuSalaryRecord> HuSalaryRecords { get; set; }
     }
 }

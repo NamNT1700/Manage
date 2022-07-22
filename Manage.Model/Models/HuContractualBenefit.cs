@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Manage.Model.Base;
 using Microsoft.EntityFrameworkCore;
-
-#nullable disable
 
 namespace Manage.Model.Models
 {
     [Table("hu_contractual_benefits")]
     [Index(nameof(ContractId), Name = "IX_hu_contractual_benefits_contract_id")]
     [Index(nameof(WelfaceId), Name = "IX_hu_contractual_benefits_welface_id")]
-    public partial class HuContractualBenefit
+    public partial class HuContractualBenefit : IEntityBase
     {
         [Key]
         [Column("id")]
@@ -42,7 +40,7 @@ namespace Manage.Model.Models
         [InverseProperty(nameof(HuContract.HuContractualBenefits))]
         public virtual HuContract Contract { get; set; }
         [ForeignKey(nameof(WelfaceId))]
-        [InverseProperty(nameof(HuWelface.HuContractualBenefits))]
-        public virtual HuWelface Welface { get; set; }
+        [InverseProperty(nameof(HuWelfare.HuContractualBenefits))]
+        public virtual HuWelfare Welfare { get; set; }
     }
 }
